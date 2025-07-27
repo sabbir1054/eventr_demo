@@ -1,7 +1,9 @@
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
 const NavBar = () => {
   return (
     <nav className="w-full flex items-center justify-between px-8 md:px-20 py-6 absolute top-0 left-0 z-20">
-      {/* Logo */}
       <div className="flex items-center gap-2">
         <span className="text-white font-bold text-2xl flex items-center">
           <svg width="32" height="32" viewBox="0 0 32 32" className="mr-2">
@@ -20,59 +22,53 @@ const NavBar = () => {
           <span className="text-[#f92d7f] ml-1">Nofakha</span>
         </span>
       </div>
+
       {/* Menu */}
       <ul className="hidden md:flex items-center gap-8 text-white font-semibold text-lg">
         <li>
-          <a href="#" className="hover:text-[#f92d7f]">
+          <Link href="/" className="hover:text-[#f92d7f]">
             Home
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="#" className="hover:text-[#f92d7f]">
+          <Link href="/about" className="hover:text-[#f92d7f]">
             About
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="#" className="hover:text-[#f92d7f]">
-            Event<span className="ml-1">&#9662;</span>
-          </a>
+          <Link href="/services" className="hover:text-[#f92d7f]">
+            Services
+          </Link>
         </li>
         <li>
-          <a href="#" className="hover:text-[#f92d7f]">
-            Portfolio<span className="ml-1">&#9662;</span>
-          </a>
+          <Link href="/ourWorks" className="hover:text-[#f92d7f]">
+            Our Work
+          </Link>
         </li>
         <li>
-          <a href="#" className="hover:text-[#f92d7f]">
-            Pages<span className="ml-1">&#9662;</span>
-          </a>
+          <Link href="/gallery" className="hover:text-[#f92d7f]">
+            Gallery
+          </Link>
         </li>
         <li>
-          <a href="#" className="hover:text-[#f92d7f]">
-            News
-          </a>
+          <Link href="/eventBooking" className="hover:text-[#f92d7f]">
+            Booking
+          </Link>
         </li>
         <li>
-          <a href="#" className="hover:text-[#f92d7f]">
+          <Link href="/contact" className="hover:text-[#f92d7f]">
             Contact
-          </a>
+          </Link>
         </li>
       </ul>
+
       {/* Icons */}
       <div className="flex items-center gap-6">
-        <button className="text-white text-2xl hover:text-[#f92d7f]">
-          <svg width="24" height="24" fill="none" stroke="currentColor">
-            <circle cx="11" cy="11" r="8" strokeWidth="2" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" strokeWidth="2" />
-          </svg>
-        </button>
-        <button className="text-white text-2xl hover:text-[#f92d7f] md:hidden">
-          <svg width="28" height="28" fill="none" stroke="currentColor">
-            <rect y="6" width="28" height="2" rx="1" fill="currentColor" />
-            <rect y="13" width="28" height="2" rx="1" fill="currentColor" />
-            <rect y="20" width="28" height="2" rx="1" fill="currentColor" />
-          </svg>
-        </button>
+        <Link href="/login">
+          <Button className="bg-[#f92d7f] text-white hover:bg-[#e91e63] transition px-6 py-2 rounded-lg">
+            Login / Register
+          </Button>
+        </Link>
       </div>
     </nav>
   );
