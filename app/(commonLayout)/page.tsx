@@ -1,4 +1,5 @@
 import BestEvent from "@/components/BestEvent/BestEvent";
+import EventAgenda from "@/components/EventAgenda/EventAgenda";
 import HeroSection from "@/components/shared/HeroSection";
 
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
     <>
       <HeroSection />
       <BestEvent />
+      <EventAgenda />
     </>
   );
 }
