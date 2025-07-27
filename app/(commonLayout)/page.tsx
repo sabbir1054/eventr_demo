@@ -2,6 +2,7 @@ import BestEvent from "@/components/BestEvent/BestEvent";
 import EventAgenda from "@/components/EventAgenda/EventAgenda";
 import HeroSection from "@/components/shared/HeroSection";
 import TestimonialsCarousel from "@/components/Testimonials/TestimonialCarousel";
+import WhyChooseUs from "@/components/WhyJoin/WhyJoinUs";
 import PricingSection from "./../../components/Pricing/PricingSection";
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
       <EventAgenda />
       <PricingSection />
       <TestimonialsCarousel />
+      <WhyChooseUs />
     </>
   );
 }
