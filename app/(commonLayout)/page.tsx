@@ -1,3 +1,10 @@
+import HeroSection from "@/components/shared/HeroSection";
+
 export default function Home() {
-  return <>Home Page</>;
+  return (
+    <>
+      <HeroSection />
+      {/* ...other content... */}
+    </>
+  );
 }

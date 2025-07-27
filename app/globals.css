@@ -51,14 +51,14 @@
 :root {
   --background: #f6f7fb; /* Light background */
   --foreground: #1c1c1c; /* Dark text */
-  --card: #ffffff; 
+  --card: #ffffff;
   --card-foreground: #1c1c1c;
   --popover: #ffffff;
   --popover-foreground: #1c1c1c;
 
   --primary: #f92d7f; /* Pink (Day 01 color) */
   --primary-foreground: #ffffff;
-  
+
   --secondary: #392c87; /* Deep blue (Day 02, Day 03 color) */
   --secondary-foreground: #ffffff;
 
@@ -67,7 +67,7 @@
 
   --muted: #f3f4f6;
   --muted-foreground: #6b7280;
-  
+
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
 
@@ -123,6 +123,23 @@
 }
 
 body {
-  background-color: var(--secondary);
+  /* background-color: var(--secondary); */
   font-family: "Inter", sans-serif;
+}
+@keyframes ping-custom {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+  80% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-ping-custom {
+  animation: ping-custom 2s infinite;
 }

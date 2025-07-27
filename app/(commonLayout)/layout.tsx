@@ -1,5 +1,4 @@
 "use client";
-import NavBar from "@/components/shared/NavBar";
 import React from "react";
 import StoreProvider from "../StoreProvide";
 
@@ -11,8 +10,10 @@ export default function CommonLayout({
   return (
     <>
       <StoreProvider>
-        <NavBar />
-        <div className="min-h-screen">{children}</div>
+        <div className="container mx-auto ">
+          {/* <NavBar /> */}
+          <div className="min-h-screen ">{children}</div>
+        </div>
         {/* <Footer /> */}
       </StoreProvider>
     </>
