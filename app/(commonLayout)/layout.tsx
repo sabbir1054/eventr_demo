@@ -12,10 +12,9 @@ export default function CommonLayout({
   return (
     <>
       <StoreProvider>
-        <div className="container mx-auto ">
-          <NavBar />
-          <div className="min-h-screen ">{children}</div>
-        </div>
+        <NavBar />
+        <div className="min-h-screen ">{children}</div>
+
         <Footer />
       </StoreProvider>
     </>
