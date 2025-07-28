@@ -84,7 +84,7 @@ const About = () => {
           className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 md:my-10"
           variants={fadeUp}
         >
-          About <span className="text-primary">NOFAKA</span>
+          About <span className="text-primary">NOFAKHA</span>
         </motion.h2>
         <motion.p
           className="text-gray-600 max-w-3xl mx-auto mb-10"

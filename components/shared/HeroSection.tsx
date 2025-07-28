@@ -47,7 +47,7 @@ export default function HeroSection() {
       >
         {/* Left: Text Content */}
         <motion.div
-          className="flex-1 flex flex-col justify-center px-8 md:px-20 py-16 z-10"
+          className="flex-1 flex flex-col justify-center px-8 md:px-20 py-16 z-10 mt-20 md:mt-0"
           variants={fadeUp}
         >
           <motion.div
