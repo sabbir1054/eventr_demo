@@ -2,9 +2,9 @@
 
 import { Button } from "@/components/ui/button";
 import { motion, Variants } from "framer-motion";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
 
 const navVariants: Variants = {
   hidden: { y: -50, opacity: 0 },
@@ -36,22 +36,24 @@ const NavBar = () => {
     >
       {/* Logo */}
       <div className="flex items-center gap-2">
-        <span className="text-white font-bold text-2xl flex items-center">
-          <svg width="32" height="32" viewBox="0 0 32 32" className="mr-2">
-            <circle cx="16" cy="16" r="16" fill="#f92d7f" />
-            <text
-              x="16"
-              y="22"
-              textAnchor="middle"
-              fontSize="16"
-              fill="#fff"
-              fontFamily="Arial"
-            >
-              N
-            </text>
-          </svg>
-          <span className="text-[#f92d7f] ml-1">Nofakha</span>
-        </span>
+        <Link href={"/"}>
+          <span className="text-white font-bold text-2xl flex items-center">
+            <svg width="32" height="32" viewBox="0 0 32 32" className="mr-2">
+              <circle cx="16" cy="16" r="16" fill="#f92d7f" />
+              <text
+                x="16"
+                y="22"
+                textAnchor="middle"
+                fontSize="16"
+                fill="#fff"
+                fontFamily="Arial"
+              >
+                N
+              </text>
+            </svg>
+            <span className="text-[#f92d7f] ml-1">Nofakha</span>
+          </span>
+        </Link>
       </div>
 
       {/* Desktop Menu */}
