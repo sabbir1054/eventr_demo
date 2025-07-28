@@ -2,8 +2,20 @@
 "use client";
 
 import CommonBanner from "@/components/shared/CommonBanner";
+import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
+
+// Variants for animations
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const staggerContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.15 } },
+};
 
 export default function RequestScheduleSection() {
   const [formData, setFormData] = useState({
@@ -28,17 +40,35 @@ export default function RequestScheduleSection() {
 
   return (
     <>
+      {/* Banner Section */}
       <div className="flex flex-col">
-        {/* Banner Section */}
         <CommonBanner page={"Services"} />
       </div>
-      <section className="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-center my-20">
+
+      {/* Main Section */}
+      <motion.section
+        className="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-center my-20"
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ amount: 0.3, once: false }}
+      >
         {/* Left: Form */}
-        <div className="bg-white shadow-md rounded-lg p-6">
+        <motion.div
+          className="bg-white shadow-md rounded-lg p-6"
+          variants={fadeUp}
+        >
           <h2 className="text-xl font-semibold mb-4">Request a Schedule</h2>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <motion.form
+            onSubmit={handleSubmit}
+            className="space-y-4"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ amount: 0.3, once: false }}
+          >
             {/* Name Fields */}
-            <div className="grid grid-cols-2 gap-4">
+            <motion.div className="grid grid-cols-2 gap-4" variants={fadeUp}>
               <input
                 type="text"
                 name="firstName"
@@ -57,10 +87,10 @@ export default function RequestScheduleSection() {
                 className="border rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:ring-pink-200"
                 required
               />
-            </div>
+            </motion.div>
 
             {/* Email & Phone */}
-            <div className="grid grid-cols-2 gap-4">
+            <motion.div className="grid grid-cols-2 gap-4" variants={fadeUp}>
               <input
                 type="email"
                 name="email"
@@ -79,10 +109,10 @@ export default function RequestScheduleSection() {
                 className="border rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:ring-pink-200"
                 required
               />
-            </div>
+            </motion.div>
 
             {/* Event Type & Date */}
-            <div className="grid grid-cols-2 gap-4">
+            <motion.div className="grid grid-cols-2 gap-4" variants={fadeUp}>
               <select
                 name="eventType"
                 value={formData.eventType}
@@ -104,37 +134,42 @@ export default function RequestScheduleSection() {
                 className="border rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:ring-pink-200"
                 required
               />
-            </div>
+            </motion.div>
 
             {/* Notes */}
-            <textarea
+            <motion.textarea
               name="notes"
               placeholder="Additional notes"
               value={formData.notes}
               onChange={handleChange}
               className="border rounded-md px-3 py-2 w-full h-24 focus:outline-none focus:ring focus:ring-pink-200"
-            ></textarea>
+              variants={fadeUp}
+            ></motion.textarea>
 
             {/* Submit */}
-            <button
+            <motion.button
               type="submit"
               className="w-full bg-pink-500 hover:bg-pink-600 text-white py-2 rounded-md transition"
+              variants={fadeUp}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               Book Now
-            </button>
-          </form>
-        </div>
+            </motion.button>
+          </motion.form>
+        </motion.div>
 
-        <div>
+        {/* Right: Image */}
+        <motion.div variants={fadeUp}>
           <Image
-            src="/eventBooking.png" // Replace with your image path
+            src="/eventBooking.png"
             alt="Event Meeting"
             width={800}
             height={500}
             className="rounded-lg object-cover w-full h-full"
           />
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
     </>
   );
 }

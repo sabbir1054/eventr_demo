@@ -8,29 +8,29 @@ const reasons = [
     title: "Access to events",
     description:
       "Enjoy seamless access to all our premium events, conferences, and workshops, ensuring you never miss an important moment.",
-    bg: "bg-blue-400",
     icon: "🎟️",
+    gradient: "from-pink-500 to-red-400",
   },
   {
     title: "Make a difference",
     description:
       "We organize events that bring real value, create memorable experiences, and make a positive impact on the community.",
-    bg: "bg-green-400",
     icon: "🤝",
+    gradient: "from-green-500 to-emerald-400",
   },
   {
     title: "Information exchange",
     description:
       "Our events are a hub for sharing ideas, learning from experts, and discovering innovative solutions for growth.",
-    bg: "bg-orange-300",
     icon: "💡",
+    gradient: "from-orange-400 to-yellow-300",
   },
   {
     title: "Skilled speakers",
     description:
       "We bring together world-class speakers and industry leaders who inspire and educate with their expertise.",
-    bg: "bg-red-400",
     icon: "🎤",
+    gradient: "from-indigo-500 to-purple-400",
   },
 ];
 
@@ -39,21 +39,13 @@ const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.1,
-    },
+    transition: { staggerChildren: 0.2, delayChildren: 0.1 },
   },
 };
 
 const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 50, scale: 0.9 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.6, ease: "easeOut" },
-  },
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
 export default function WhyChooseUs() {
@@ -93,24 +85,26 @@ export default function WhyChooseUs() {
             variants={cardVariants}
             whileHover={{
               scale: 1.05,
-              rotateX: 5,
-              rotateY: -5,
               transition: { duration: 0.3, ease: "easeOut" },
             }}
-            className={`${reason.bg} text-white p-6 rounded-md relative overflow-hidden transform transition-all duration-300 hover:shadow-2xl`}
+            className="bg-white text-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition relative overflow-hidden"
           >
             {/* Icon */}
-            <div className="text-4xl mb-4">{reason.icon}</div>
+            <div
+              className={`w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-r ${reason.gradient} text-2xl mb-4`}
+            >
+              {reason.icon}
+            </div>
 
             {/* Title */}
-            <h3 className="text-xl font-semibold mb-3">{reason.title}</h3>
+            <h3 className="text-lg font-semibold mb-2">{reason.title}</h3>
 
             {/* Description */}
-            <p className="text-sm mb-4">{reason.description}</p>
+            <p className="text-sm text-gray-600 mb-4">{reason.description}</p>
 
             {/* Arrow Link */}
             <motion.div
-              className="flex items-center gap-2 text-sm font-medium cursor-pointer text-yellow-200"
+              className="flex items-center gap-2 text-sm font-medium cursor-pointer text-pink-500"
               whileHover={{ x: 5 }}
             >
               <ArrowRight className="w-4 h-4" />

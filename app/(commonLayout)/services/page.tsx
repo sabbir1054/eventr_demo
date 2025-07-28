@@ -1,6 +1,10 @@
+"use client";
+
 import CommonBanner from "@/components/shared/CommonBanner";
+import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 
+// Data
 const topServices = [
   {
     title: "Corporate Events",
@@ -97,6 +101,20 @@ const detailedServices = [
   },
 ];
 
+// Animation Variants
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2, delayChildren: 0.1 },
+  },
+};
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
 const ServicesPage = () => {
   return (
     <>
@@ -106,34 +124,45 @@ const ServicesPage = () => {
       </div>
 
       <div className="w-full min-h-screen">
-        {/* Top Section with Background (Covers Heading + 6 Cards) */}
-        <div
+        {/* Top Section */}
+        <motion.div
           className="bg-cover bg-center bg-no-repeat py-16"
-          style={{
-            backgroundImage: "url('/pattern_bg.png')",
-          }}
+          style={{ backgroundImage: "url('/pattern_bg.png')" }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.2 }}
+          variants={containerVariants}
         >
-          <div className="text-center">
+          {/* Section Heading */}
+          <motion.div className="text-center" variants={cardVariants}>
             <p className="text-pink-600 font-medium">Our services</p>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">
               We provide the best services
             </h2>
-          </div>
+          </motion.div>
 
           {/* Top 6 Service Cards */}
           <div className="max-w-7xl mx-auto px-4 py-16">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            <motion.div
+              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.2 }}
+            >
               {topServices.map((service, index) => (
-                <div
+                <motion.div
                   key={index}
-                  className="bg-white rounded-md hover:shadow-sm hover:cursor-pointer border-primary transition overflow-hidden"
+                  className="bg-white rounded-md hover:shadow-md border-primary transition overflow-hidden"
+                  variants={cardVariants}
+                  whileHover={{ scale: 1.05 }}
                 >
                   <Image
                     src={service.img}
                     alt={service.title}
                     width={400}
                     height={300}
-                    className="object-cover w-full h-56"
+                    className="object-cover w-full h-56 transition-transform duration-500 hover:scale-110"
                   />
                   <div className="p-4 text-center">
                     <h3 className="text-lg font-semibold hover:text-primary text-gray-900 mb-2 hover:cursor-pointer">
@@ -143,36 +172,53 @@ const ServicesPage = () => {
                       {service.description}
                     </p>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Detailed Services */}
-        <div className="max-w-7xl mx-auto px-4 pb-16 mb-20 md:mb-30">
-          <p className="text-center text-pink-600 font-medium mb-2">
+        <motion.div
+          className="max-w-7xl mx-auto px-4 pb-16 mb-20 md:mb-30"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.2 }}
+          variants={containerVariants}
+        >
+          <motion.p
+            className="text-center text-pink-600 font-medium mb-2"
+            variants={cardVariants}
+          >
             We are best
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+          </motion.p>
+          <motion.h2
+            className="text-3xl md:text-4xl font-bold text-center mb-12"
+            variants={cardVariants}
+          >
             All services in one place
-          </h2>
+          </motion.h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
+            variants={containerVariants}
+          >
             {detailedServices.map((service, index) => {
               const isLastRow = index >= detailedServices.length - 3;
               const isLastColumn = (index + 1) % 3 === 0;
 
               return (
-                <div
+                <motion.div
                   key={index}
-                  className="flex flex-col items-center text-center p-10"
+                  className="flex flex-col items-center text-center p-10 hover:bg-pink-50 transition"
+                  variants={cardVariants}
                   style={{
-                    borderRight: isLastColumn ? "none" : "1px solid #e5e7eb", // Tailwind gray-200
+                    borderRight: isLastColumn ? "none" : "1px solid #e5e7eb",
                     borderBottom: isLastRow ? "none" : "1px solid #e5e7eb",
                   }}
+                  whileHover={{ scale: 1.03 }}
                 >
-                  <div className="mb-4 flex items-center justify-center bg-pink-50 border border-pink-100 rounded-md">
+                  <div className="mb-4 flex items-center justify-center bg-pink-50 border border-pink-100 rounded-md p-2">
                     <Image
                       src={service.icon}
                       alt={service.title}
@@ -184,11 +230,11 @@ const ServicesPage = () => {
                     {service.title}
                   </h3>
                   <p className="text-gray-600 text-md">{service.description}</p>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </>
   );
