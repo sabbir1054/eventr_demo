@@ -3,6 +3,7 @@
 import CommonBanner from "@/components/shared/CommonBanner";
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 // Data
 const topServices = [
@@ -116,129 +117,130 @@ const cardVariants: Variants = {
 };
 
 const ServicesPage = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreen = () => setIsMobile(window.innerWidth < 768);
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
+
   return (
-    <>
-      <div className="flex flex-col bg-gradient-to-b from-gray-100 to-white">
-        {/* Banner Section */}
-        <CommonBanner page={"Services"} />
+    <div className="bg-gray-100">
+      {/* Banner Section */}
+      <CommonBanner page={"Services"} />
 
-        <div className="w-full min-h-screen">
-          {/* Top Section */}
+      {/* Top Services Section */}
+      <motion.div
+        className="bg-gray-50 bg-cover bg-center bg-no-repeat py-16"
+        style={{ backgroundImage: "url('/pattern_bg.png')" }}
+        initial="hidden"
+        whileInView="visible"
+        viewport={isMobile ? undefined : { once: false, amount: 0.2 }}
+        variants={containerVariants}
+      >
+        {/* Section Heading */}
+        <motion.div className="text-center" variants={cardVariants}>
+          <p className="text-pink-600 font-medium">Our services</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">
+            We provide the best services
+          </h2>
+        </motion.div>
+
+        {/* Top 9 Service Cards */}
+        <div className="max-w-7xl mx-auto px-4 py-16">
           <motion.div
-            className="bg-gray-50 bg-cover bg-center bg-no-repeat py-16"
-            style={{ backgroundImage: "url('/pattern_bg.png')" }}
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
+            variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, amount: 0.2 }}
-            variants={containerVariants}
+            viewport={isMobile ? undefined : { once: false, amount: 0.2 }}
           >
-            {/* Section Heading */}
-            <motion.div className="text-center" variants={cardVariants}>
-              <p className="text-pink-600 font-medium">Our services</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">
-                We provide the best services
-              </h2>
-            </motion.div>
-
-            {/* Top 6 Service Cards */}
-            <div className="max-w-7xl mx-auto px-4 py-16">
+            {topServices.map((service, index) => (
               <motion.div
-                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: false, amount: 0.2 }}
+                key={index}
+                className="bg-white rounded-lg shadow-md hover:shadow-lg transition overflow-hidden border border-gray-200"
+                variants={cardVariants}
+                whileHover={{ scale: 1.05 }}
               >
-                {topServices.map((service, index) => (
-                  <motion.div
-                    key={index}
-                    className="bg-white rounded-lg shadow-sm hover:shadow-md transition overflow-hidden border border-gray-200"
-                    variants={cardVariants}
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <Image
-                      src={service.img}
-                      alt={service.title}
-                      width={400}
-                      height={300}
-                      className="object-cover w-full h-56 transition-transform duration-500 hover:scale-110"
-                    />
-                    <div className="p-4 text-center">
-                      <h3 className="text-lg font-semibold hover:text-primary text-gray-900 mb-2 hover:cursor-pointer">
-                        {service.title}
-                      </h3>
-                      <p className="text-gray-600 text-md">
-                        {service.description}
-                      </p>
-                    </div>
-                  </motion.div>
-                ))}
+                <Image
+                  src={service.img}
+                  alt={service.title}
+                  width={400}
+                  height={300}
+                  className="object-cover w-full h-56 transition-transform duration-500 hover:scale-110"
+                />
+                <div className="p-4 text-center">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2 hover:text-pink-600 cursor-pointer">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-600 text-md">{service.description}</p>
+                </div>
               </motion.div>
-            </div>
-          </motion.div>
-
-          {/* Detailed Services */}
-          <motion.div
-            className="max-w-7xl mx-auto px-4 pb-16 mb-20 md:mb-30 bg-gray-50 rounded-lg shadow-inner"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.2 }}
-            variants={containerVariants}
-          >
-            <motion.p
-              className="text-center text-pink-600 font-medium mb-2"
-              variants={cardVariants}
-            >
-              We are best
-            </motion.p>
-            <motion.h2
-              className="text-3xl md:text-4xl font-bold text-center mb-12"
-              variants={cardVariants}
-            >
-              All services in one place
-            </motion.h2>
-
-            <motion.div
-              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
-              variants={containerVariants}
-            >
-              {detailedServices.map((service, index) => {
-                const isLastRow = index >= detailedServices.length - 3;
-                const isLastColumn = (index + 1) % 3 === 0;
-
-                return (
-                  <motion.div
-                    key={index}
-                    className="flex flex-col items-center text-center p-10 hover:bg-pink-50 transition"
-                    variants={cardVariants}
-                    style={{
-                      borderRight: isLastColumn ? "none" : "1px solid #e5e7eb",
-                      borderBottom: isLastRow ? "none" : "1px solid #e5e7eb",
-                    }}
-                    whileHover={{ scale: 1.03 }}
-                  >
-                    <div className="mb-4 flex items-center justify-center bg-pink-50 border border-pink-100 rounded-md p-2">
-                      <Image
-                        src={service.icon}
-                        alt={service.title}
-                        width={70}
-                        height={70}
-                      />
-                    </div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                      {service.title}
-                    </h3>
-                    <p className="text-gray-600 text-md">
-                      {service.description}
-                    </p>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
+            ))}
           </motion.div>
         </div>
-      </div>
-    </>
+      </motion.div>
+
+      {/* Detailed Services */}
+      <motion.div
+        className="max-w-7xl mx-auto px-4 pb-16 mb-20 md:mb-30 bg-gray-50 rounded-lg shadow-md"
+        initial="hidden"
+        whileInView="visible"
+        viewport={isMobile ? undefined : { once: false, amount: 0.2 }}
+        variants={containerVariants}
+      >
+        <motion.p
+          className="text-center text-pink-600 font-medium mb-2"
+          variants={cardVariants}
+        >
+          We are best
+        </motion.p>
+        <motion.h2
+          className="text-3xl md:text-4xl font-bold text-center mb-12"
+          variants={cardVariants}
+        >
+          All services in one place
+        </motion.h2>
+
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
+          variants={containerVariants}
+        >
+          {detailedServices.map((service, index) => {
+            const isLastRow = index >= detailedServices.length - 3;
+            const isLastColumn = (index + 1) % 3 === 0;
+
+            return (
+              <motion.div
+                key={index}
+                className="flex flex-col items-center text-center p-10 hover:bg-pink-50 transition"
+                variants={cardVariants}
+                style={{
+                  borderRight: isLastColumn ? "none" : "1px solid #e5e7eb",
+                  borderBottom: isLastRow ? "none" : "1px solid #e5e7eb",
+                }}
+                whileHover={{ scale: 1.03 }}
+              >
+                <div className="mb-4 flex items-center justify-center bg-pink-50 border border-pink-100 rounded-md p-2">
+                  <Image
+                    src={service.icon}
+                    alt={service.title}
+                    width={70}
+                    height={70}
+                  />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  {service.title}
+                </h3>
+                <p className="text-gray-600 text-md">{service.description}</p>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+      </motion.div>
+    </div>
   );
 };
 
