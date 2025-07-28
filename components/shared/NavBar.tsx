@@ -3,6 +3,8 @@
 import { Button } from "@/components/ui/button";
 import { motion, Variants } from "framer-motion";
 import Link from "next/link";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
 
 const navVariants: Variants = {
   hidden: { y: -50, opacity: 0 },
@@ -15,6 +17,8 @@ const menuItemVariants: Variants = {
 };
 
 const NavBar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   const menuItems = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
@@ -25,7 +29,7 @@ const NavBar = () => {
 
   return (
     <motion.nav
-      className="w-full flex items-center justify-between px-8 md:px-20 py-6 absolute top-0 left-0 z-20"
+      className="w-full flex items-center justify-between px-6 md:px-20 py-4 absolute top-0 left-0 z-20 bg-transparent"
       variants={navVariants}
       initial="hidden"
       animate="visible"
@@ -50,7 +54,7 @@ const NavBar = () => {
         </span>
       </div>
 
-      {/* Menu */}
+      {/* Desktop Menu */}
       <ul className="hidden md:flex items-center gap-8 text-white font-semibold text-lg">
         {menuItems.map((item, i) => (
           <motion.li
@@ -66,9 +70,9 @@ const NavBar = () => {
         ))}
       </ul>
 
-      {/* Login/Register Button */}
+      {/* Login/Register Button - Desktop */}
       <motion.div
-        className="flex items-center gap-6"
+        className="hidden md:flex items-center gap-6"
         initial={{ opacity: 0, y: -10 }}
         animate={{
           opacity: 1,
@@ -82,6 +86,47 @@ const NavBar = () => {
           </Button>
         </Link>
       </motion.div>
+
+      {/* Mobile Menu Button */}
+      <div className="md:hidden z-30">
+        {isOpen ? (
+          <X
+            className="text-white w-7 h-7 cursor-pointer"
+            onClick={() => setIsOpen(false)}
+          />
+        ) : (
+          <Menu
+            className="text-white w-7 h-7 cursor-pointer"
+            onClick={() => setIsOpen(true)}
+          />
+        )}
+      </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          className="absolute top-0 left-0 w-full h-screen bg-black bg-opacity-90 flex flex-col items-center justify-center space-y-8 text-white font-semibold text-xl md:hidden"
+        >
+          {menuItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setIsOpen(false)}
+              className="hover:text-[#f92d7f] transition"
+            >
+              {item.name}
+            </Link>
+          ))}
+          <Link href="/login" onClick={() => setIsOpen(false)}>
+            <Button className="bg-[#f92d7f] text-white hover:bg-[#e91e63] transition px-6 py-2 rounded-lg cursor-pointer">
+              Login / Register
+            </Button>
+          </Link>
+        </motion.div>
+      )}
     </motion.nav>
   );
 };
