@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function HeroSection() {
@@ -29,9 +30,12 @@ export default function HeroSection() {
             2025
           </h1>
           <div className="flex items-center gap-4 mt-6">
-            <button className="hover:cursor-pointer bg-[#f92d7f] hover:bg-[#e91e63] text-white font-semibold px-8 py-3 rounded-lg text-lg shadow transition">
-              Book now
-            </button>
+            <Link href={"/eventBooking"}>
+              {" "}
+              <button className="hover:cursor-pointer bg-[#f92d7f] hover:bg-[#e91e63] text-white font-semibold px-8 py-3 rounded-lg text-lg shadow transition">
+                Book now
+              </button>
+            </Link>
             <div
               onClick={() => setIsModalOpen(true)}
               className="flex items-center space-x-3 px-4 py-2 rounded-md hover:cursor-pointer"
