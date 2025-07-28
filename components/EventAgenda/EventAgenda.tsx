@@ -2,21 +2,21 @@ import Image from "next/image";
 
 const topServices = [
   {
-    title: "Business conference",
+    title: "Corporate Events",
     description:
-      "We organize impactful business conferences that help professionals connect, network, and explore new opportunities.",
+      "We manage corporate events such as product launches, seminars, and team-building activities with professional precision.",
     img: "/st1.png",
   },
   {
-    title: "Skill development",
+    title: "Weddings & Engagements",
     description:
-      "Our skill development programs focus on building practical expertise and knowledge for personal and professional growth.",
+      "We design and execute stunning weddings and engagement parties tailored to your culture, traditions, and style.",
     img: "/st2.png",
   },
   {
-    title: "Finance consultancy",
+    title: "Birthday & Private Parties",
     description:
-      "We provide expert financial consultancy to help organizations and individuals make informed strategic decisions.",
+      "We create unforgettable birthday celebrations, anniversaries, and private parties with unique themes and decor.",
     img: "/st3.png",
   },
 ];

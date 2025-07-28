@@ -3,40 +3,58 @@ import Image from "next/image";
 
 const topServices = [
   {
-    title: "Business conference",
+    title: "Corporate Events",
     description:
-      "We organize impactful business conferences that help professionals connect, network, and explore new opportunities.",
+      "We manage corporate events such as product launches, seminars, and team-building activities with professional precision.",
     img: "/st1.png",
   },
   {
-    title: "Skill development",
+    title: "Weddings & Engagements",
     description:
-      "Our skill development programs focus on building practical expertise and knowledge for personal and professional growth.",
+      "We design and execute stunning weddings and engagement parties tailored to your culture, traditions, and style.",
     img: "/st2.png",
   },
   {
-    title: "Finance consultancy",
+    title: "Birthday & Private Parties",
     description:
-      "We provide expert financial consultancy to help organizations and individuals make informed strategic decisions.",
+      "We create unforgettable birthday celebrations, anniversaries, and private parties with unique themes and decor.",
     img: "/st3.png",
   },
   {
-    title: "Meetup conference",
+    title: "Concerts & Live Shows",
     description:
-      "We arrange small and large meetup events, creating opportunities for communities to share ideas and collaborate.",
+      "From stage setup to sound and lighting, we organize large-scale concerts and live entertainment shows across Egypt.",
     img: "/st4.png",
   },
   {
-    title: "Keynote events",
+    title: "Festivals & Cultural Events",
     description:
-      "Our keynote events bring together industry leaders to inspire, educate, and share their valuable experiences.",
+      "We manage cultural festivals, exhibitions, and public events that highlight Egypt's heritage and modern trends.",
     img: "/st5.png",
   },
   {
-    title: "International conference",
+    title: "Exhibitions & Trade Fairs",
     description:
-      "We plan and host international conferences that connect experts and innovators from across the globe.",
+      "We handle all aspects of exhibitions and trade fairs, from booth design to full event coordination.",
     img: "/st6.png",
+  },
+  {
+    title: "Corporate Gala Dinners",
+    description:
+      "Our team arranges elegant gala dinners and award ceremonies for corporate clients and VIP gatherings.",
+    img: "/st7.png",
+  },
+  {
+    title: "Destination Events",
+    description:
+      "We plan destination weddings and luxury events at Egypt’s most iconic locations such as the Red Sea and Nile resorts.",
+    img: "/st8.png",
+  },
+  {
+    title: "Event Design & Decoration",
+    description:
+      "Our creative team handles all event themes, stage designs, floral arrangements, and complete decoration services.",
+    img: "/st9.png",
   },
 ];
 
@@ -121,7 +139,7 @@ const ServicesPage = () => {
                     <h3 className="text-lg font-semibold hover:text-primary text-gray-900 mb-2 hover:cursor-pointer">
                       {service.title}
                     </h3>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-gray-600 text-md">
                       {service.description}
                     </p>
                   </div>
@@ -132,7 +150,7 @@ const ServicesPage = () => {
         </div>
 
         {/* Detailed Services */}
-        <div className="max-w-7xl mx-auto px-4 pb-16 mb-20">
+        <div className="max-w-7xl mx-auto px-4 pb-16 mb-20 md:mb-30">
           <p className="text-center text-pink-600 font-medium mb-2">
             We are best
           </p>
@@ -148,24 +166,24 @@ const ServicesPage = () => {
               return (
                 <div
                   key={index}
-                  className="flex flex-col items-center text-center p-6"
+                  className="flex flex-col items-center text-center p-10"
                   style={{
                     borderRight: isLastColumn ? "none" : "1px solid #e5e7eb", // Tailwind gray-200
                     borderBottom: isLastRow ? "none" : "1px solid #e5e7eb",
                   }}
                 >
-                  <div className="w-14 h-14 mb-4 flex items-center justify-center bg-pink-50 border border-pink-100 rounded-md">
+                  <div className="mb-4 flex items-center justify-center bg-pink-50 border border-pink-100 rounded-md">
                     <Image
                       src={service.icon}
                       alt={service.title}
-                      width={40}
-                      height={40}
+                      width={70}
+                      height={70}
                     />
                   </div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">
                     {service.title}
                   </h3>
-                  <p className="text-gray-600 text-sm">{service.description}</p>
+                  <p className="text-gray-600 text-md">{service.description}</p>
                 </div>
               );
             })}
