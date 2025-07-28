@@ -1,3 +1,6 @@
+"use client";
+
+import { motion, Variants } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const reasons = [
@@ -31,19 +34,70 @@ const reasons = [
   },
 ];
 
+// Animation Variants
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 50, scale: 0.9 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
 export default function WhyChooseUs() {
   return (
     <section className="max-w-7xl mx-auto px-4 py-16 text-center mb-10 md:mb-20">
-      <p className="text-pink-600 font-medium mb-2">Why Choose Us</p>
-      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-10">
+      {/* Section Title */}
+      <motion.p
+        className="text-pink-600 font-medium mb-2"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ amount: 0.3 }}
+      >
+        Why Choose Us
+      </motion.p>
+      <motion.h2
+        className="text-3xl md:text-4xl font-bold text-gray-900 mb-10"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ amount: 0.3 }}
+      >
         Why you join us?
-      </h2>
+      </motion.h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Cards */}
+      <motion.div
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ amount: 0.2 }}
+      >
         {reasons.map((reason, idx) => (
-          <div
+          <motion.div
             key={idx}
-            className={`${reason.bg} text-white p-6 rounded-md relative overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl`}
+            variants={cardVariants}
+            whileHover={{
+              scale: 1.05,
+              rotateX: 5,
+              rotateY: -5,
+              transition: { duration: 0.3, ease: "easeOut" },
+            }}
+            className={`${reason.bg} text-white p-6 rounded-md relative overflow-hidden transform transition-all duration-300 hover:shadow-2xl`}
           >
             {/* Icon */}
             <div className="text-4xl mb-4">{reason.icon}</div>
@@ -55,13 +109,16 @@ export default function WhyChooseUs() {
             <p className="text-sm mb-4">{reason.description}</p>
 
             {/* Arrow Link */}
-            <div className="flex items-center gap-2 text-sm font-medium cursor-pointer hover:translate-x-1 transition-transform duration-200">
-              <ArrowRight className="w-4 h-4 text-yellow-200" />
-              <span className="text-yellow-200">Learn more</span>
-            </div>
-          </div>
+            <motion.div
+              className="flex items-center gap-2 text-sm font-medium cursor-pointer text-yellow-200"
+              whileHover={{ x: 5 }}
+            >
+              <ArrowRight className="w-4 h-4" />
+              <span>Learn more</span>
+            </motion.div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }

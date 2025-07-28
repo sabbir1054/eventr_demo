@@ -1,4 +1,8 @@
+"use client";
+
+import { motion, Variants } from "framer-motion";
 import { Check } from "lucide-react";
+
 const packages = [
   {
     title: "Basic Celebration",
@@ -23,7 +27,7 @@ const packages = [
       "Professional event coordinator",
     ],
     buttonText: "Book Now",
-    highlight: true, // Highlight the middle card
+    highlight: true,
   },
   {
     title: "Luxury Experience",
@@ -41,28 +45,65 @@ const packages = [
   },
 ];
 
+// Animation variants
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      delayChildren: 0.2,
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
 export default function PricingSection() {
   return (
     <section
       className="relative bg-cover bg-center bg-no-repeat py-20"
-      style={{ backgroundImage: "url('/pricing.png')" }} 
+      style={{ backgroundImage: "url('/pricing.png')" }}
     >
-      <div className="text-center mb-12">
+      {/* Section Header */}
+      <motion.div
+        className="text-center mb-12"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ amount: 0.3 }}
+      >
         <p className="text-pink-500 font-medium">Event Packages</p>
         <h2 className="text-3xl md:text-4xl font-bold text-white">
           Book Your Perfect Event Plan
         </h2>
-      </div>
+      </motion.div>
 
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
+      {/* Pricing Cards */}
+      <motion.div
+        className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ amount: 0.3 }}
+      >
         {packages.map((pkg, idx) => (
-          <div
+          <motion.div
             key={idx}
+            variants={cardVariants}
+            whileHover={{
+              scale: 1.05,
+              y: -10,
+              transition: { duration: 0.3, ease: "easeOut" },
+            }}
             className={`${
               pkg.highlight
                 ? "bg-indigo-900 text-white"
                 : "bg-white text-gray-900"
-            } rounded-md shadow-md p-8 flex flex-col items-center`}
+            } rounded-md shadow-md p-8 flex flex-col items-center transition-transform`}
           >
             <h3
               className={`text-xl font-bold mb-4 ${
@@ -91,12 +132,16 @@ export default function PricingSection() {
                 </div>
               ))}
             </div>
-            <button className="mt-8 bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded transition">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="mt-8 bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded transition cursor-pointer"
+            >
               {pkg.buttonText}
-            </button>
-          </div>
+            </motion.button>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }

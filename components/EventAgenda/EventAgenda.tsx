@@ -1,3 +1,6 @@
+"use client";
+
+import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 
 const topServices = [
@@ -21,38 +24,66 @@ const topServices = [
   },
 ];
 
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 50, scale: 0.9 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
+
 const EventAgenda = () => {
   return (
     <div>
-      <div className="text-center">
+      {/* Section Title */}
+      <motion.div
+        className="text-center"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ amount: 0.2 }}
+      >
         <p className="text-pink-600 font-medium">Our services</p>
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">
           We provide the best services
         </h2>
-      </div>
+      </motion.div>
 
-      {/* Top 6 Service Cards */}
+      {/* Top Services Cards */}
       <div className="max-w-7xl mx-auto px-4 py-16 md:mb-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {topServices?.map((service, index) => (
-            <div
+            <motion.div
               key={index}
-              className="bg-white rounded-md hover:shadow-sm hover:cursor-pointer border-primary transition overflow-hidden"
+              className="bg-white rounded-md border border-transparent hover:border-pink-500 hover:shadow-lg transition-all duration-300 overflow-hidden group"
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ amount: 0.2 }}
+              whileHover={{ scale: 1.05, rotateX: 3, rotateY: -3 }}
             >
-              <Image
-                src={service.img}
-                alt={service.title}
-                width={400}
-                height={300}
-                className="object-cover w-full h-56"
-              />
+              <motion.div
+                className="overflow-hidden"
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.4 }}
+              >
+                <Image
+                  src={service.img}
+                  alt={service.title}
+                  width={400}
+                  height={300}
+                  className="object-cover w-full h-56 transform transition-transform duration-500 group-hover:scale-110"
+                />
+              </motion.div>
               <div className="p-4 text-center">
-                <h3 className="text-lg font-semibold hover:text-primary text-gray-900 mb-2 hover:cursor-pointer">
+                <motion.h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-pink-600 transition-colors duration-300">
                   {service.title}
-                </h3>
-                <p className="text-gray-600 text-sm ">{service.description}</p>
+                </motion.h3>
+                <p className="text-gray-600 text-sm">{service.description}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
